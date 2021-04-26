@@ -25,6 +25,13 @@ def search(name):
 	data = stove.character_info(user_name)
 	return jsonify(data)
 
+@app.route("/item/<string:item_name>")
+#@cross_origin()
+def item_search(item_name):
+	item_name = item_name
+	data = stove.item_info(item_name)
+	return jsonify(data)
+
 @app.errorhandler(404)
 def not_found_error(error):
 	return 'missing request'

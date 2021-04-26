@@ -1,7 +1,38 @@
 import requests
+from urllib import parse
 from bs4 import BeautifulSoup
 import json
 import re
+
+def item_info(item_name):
+    data = {}
+    try:
+        url = 'https://m-lostark.game.onstove.com/Market/GetMarketItemList'
+        url_param = parse.urlparse('https://m-lostark.game.onstove.com/Market/GetMarketItemList?itemName='+item_name)
+        url_query = parse.parse_qs(url_param.query)
+        url_query2 = parse.urlencode(url_query, doseq=False)
+        #print(url+'?'+url_query2)
+        #req = requests.get(url+'?'+url_query2+'&isInit=false')
+        req = requests.get('https://m-lostark.game.onstove.com/Market/GetMarketItemList?itemName='+item_name+'&isInit=false')
+        html = req.text
+        soup = BeautifulSoup(html, 'html.parser')
+        c_info = soup.select('li')
+        data_arr = []
+        for i in range(len(c_info)):
+            temp_arr = {}
+            temp_arr['item_name']=c_info[i].select('.name')[0].get_text()
+            temp_arr['avg_price']=c_info[i].select('.list__detail')[0].select('tr')[0].select('em')[0].get_text()
+            temp_arr['last_price']=c_info[i].select('.list__detail')[0].select('tr')[1].select('em')[0].get_text()
+            temp_arr['current_price']=c_info[i].select('.list__detail')[0].select('tr')[2].select('em')[0].get_text()
+            data_arr.append(temp_arr)
+        data['data']=data_arr
+        #return data
+    except Exception as e :
+        data['code']='error'
+        #data['e']=e
+        data['e']='not found item'
+    finally:
+        return data
 
 def character_info(user_name):
     data = {}
