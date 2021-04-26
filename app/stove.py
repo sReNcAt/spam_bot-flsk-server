@@ -21,9 +21,9 @@ def item_info(item_name):
         for i in range(len(c_info)):
             temp_arr = {}
             temp_arr['item_name']=c_info[i].select('.name')[0].get_text()
-            temp_arr['avg_price']=c_info[i].select('.list__detail')[0].select('tr')[0].select('em')[0].get_text()
-            temp_arr['last_price']=c_info[i].select('.list__detail')[0].select('tr')[1].select('em')[0].get_text()
-            temp_arr['current_price']=c_info[i].select('.list__detail')[0].select('tr')[2].select('em')[0].get_text()
+            temp_arr['current_price']=c_info[i].select('.list__detail')[0].select('tr')[0].select('em')[0].get_text()
+            temp_arr['avg_price']=c_info[i].select('.list__detail')[0].select('tr')[1].select('em')[0].get_text()
+            temp_arr['last_price']=c_info[i].select('.list__detail')[0].select('tr')[2].select('em')[0].get_text()
             data_arr.append(temp_arr)
         data['data']=data_arr
         #return data
