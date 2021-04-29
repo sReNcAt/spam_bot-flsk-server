@@ -18,6 +18,12 @@ app.config['JSON_AS_ASCII'] = False
 CORS(app)
 #app.session_interface = RedisSessionInterface()
 
+@app.route("/mari")
+#@cross_origin()
+def mari():
+	data = stove.mari_info()
+	return jsonify(data)
+
 @app.route("/search/<string:name>")
 #@cross_origin()
 def search(name):

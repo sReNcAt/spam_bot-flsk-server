@@ -4,6 +4,38 @@ from bs4 import BeautifulSoup
 import json
 import re
 
+def mari_info():
+    data = {}
+    try:
+        req = requests.get('https://m-lostark.game.onstove.com/Shop#mari')
+        html = req.text
+        soup = BeautifulSoup(html, 'html.parser')
+        c_info = soup.select('#shopMari')
+        c_info2 = c_info[0].select('.for-mari')
+        T3 = c_info2[0].select('.list-items--mari')
+        T2 = c_info2[1].select('.list-items--mari')
+        
+        T3_list = T3[0].select('li')
+        T2_list = T2[0].select('li')
+        
+        T3_data = []
+        T2_data = []
+        
+        for i in range(len(T3_list)):
+            T3_data.append({'name':T3_list[i].select('.item-name')[0].get_text(),'price':T3_list[i].select('em')[0].get_text()})
+        for i in range(len(T2_list)):
+            T2_data.append({'name':T2_list[i].select('.item-name')[0].get_text(),'price':T2_list[i].select('em')[0].get_text()})
+        data['T3']=T3_data
+        data['T2']=T2_data
+        data['code']='ok'
+    except Exception as e :
+        data['code']='error'
+        data['e']='not found item'
+        #data['e']=e
+    finally:
+        return data
+        #pass
+
 def item_info(item_name):
     data = {}
     try:
