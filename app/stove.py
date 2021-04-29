@@ -24,15 +24,20 @@ def item_info(item_name):
             temp_arr['current_price']=c_info[i].select('.list__detail')[0].select('tr')[0].select('em')[0].get_text()
             temp_arr['avg_price']=c_info[i].select('.list__detail')[0].select('tr')[1].select('em')[0].get_text()
             temp_arr['last_price']=c_info[i].select('.list__detail')[0].select('tr')[2].select('em')[0].get_text()
+            if(len(c_info[i].select('.count'))>0):
+                temp_arr['count']=c_info[i].select('.count')[0].get_text()
+            else:
+                temp_arr['count']=''
             data_arr.append(temp_arr)
         data['data']=data_arr
-        #return data
+        #return c_info
     except Exception as e :
         data['code']='error'
-        #data['e']=e
         data['e']='not found item'
+        #data['e']=e
     finally:
         return data
+        #pass
 
 def character_info(user_name):
     data = {}
