@@ -139,7 +139,6 @@ def character_info(user_name):
             equip_data['00'+str(i)] = re.sub('<.+?>', '', script_data['Equip'][equip_data['00'+str(i)]]['Element_000']['value'], 0, re.I|re.S)
 
         #각인
-        
         c_info2 = soup.select('.profile-tab');
         temp = c_info2[0].select('.profile-ability-engrave')
         temp2 = temp[0].select('li')
@@ -152,6 +151,19 @@ def character_info(user_name):
         data['equip_img']=equip_img
         data['ablity']=ablity
         
+        #스텟
+        c_info3 = soup.select('.profile-ability-basic')
+        
+        data['attack']= c_info3[0].select('li')[0].select('span')[1].get_text()
+        data['hp']= c_info3[0].select('li')[4].select('span')[1].get_text()
+        
+        data['stat1']=c_info3[1].select('span')[1].get_text() #치
+        data['stat2']=c_info3[1].select('span')[3].get_text() #특
+        data['stat3']=c_info3[1].select('span')[5].get_text() #제
+        data['stat4']=c_info3[1].select('span')[7].get_text() #신
+        data['stat5']=c_info3[1].select('span')[9].get_text() #인
+        data['stat6']=c_info3[1].select('span')[11].get_text() #숙
+                
     except Exception as e :
         data['code']='error'
         data['e']=e
