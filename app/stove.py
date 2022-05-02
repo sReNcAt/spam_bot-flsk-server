@@ -128,6 +128,7 @@ def character_info(user_name):
         '''
         equip_data = {}
         equip_img = {}
+        equip_quality = {}
 
         equip = soup.select('.profile-equipment__slot')
 
@@ -151,6 +152,7 @@ def character_info(user_name):
         #data['script']=script_data
         data['equip']=equip_data
         data['equip_img']=equip_img
+        data['equip_quality']=equip_quality
         data['ablity']=ablity
         
         #스텟
