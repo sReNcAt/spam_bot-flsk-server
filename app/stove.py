@@ -137,6 +137,7 @@ def character_info(user_name):
             if(equip[0].select('.profile-item')[i].attrs.get('data-item',None)[:1]=="E"):
                 equip_data['00'+str(i)] = equip[0].select('.profile-item')[i].attrs.get('data-item',None)
                 equip_img['00'+str(i)] = script_data['Equip'][equip_data['00'+str(i)]]['Element_001']['value']['slotData']['iconPath']
+                equip_quality['00'+str(i)] = script_data['Equip'][equip_data['00'+str(i)]]['Element_001']['value']['qualityValue']
                 equip_data['00'+str(i)] = re.sub('<.+?>', '', script_data['Equip'][equip_data['00'+str(i)]]['Element_000']['value'], 0, re.I|re.S)
 
         #각인
