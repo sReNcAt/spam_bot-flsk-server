@@ -147,7 +147,7 @@ def character_info(user_name):
         for i in range(len(temp2)):
             ablity.append(temp2[i].select('span')[0].get_text())
         
-        data['script']=script_data
+        #data['script']=script_data
         data['equip']=equip_data
         data['equip_img']=equip_img
         data['ablity']=ablity
