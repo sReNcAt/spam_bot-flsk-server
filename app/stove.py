@@ -149,6 +149,33 @@ def character_info(user_name):
         for i in range(len(temp2)):
             ablity.append(temp2[i].select('span')[0].get_text())
         
+        card_data = {}
+        card_effect = {}
+        card_info = soup.select('#cardSetList')
+        if(len(card_info)>0):
+            data['card_len']=len(card_info[0].select('li'));
+            for i in range(len(card_info[0].select('li'))):
+                card_data[str(i)] = card_info[0].select('li')[i].select('div')[0].get_text()
+                card_effect[str(i)] = card_info[0].select('li')[i].select('div')[1].get_text()
+                pass
+            pass
+
+        data['card_data']=card_data
+        data['card_effect']=card_effect
+        jewel = soup.select('#profile-jewel')[0].select('div>ul')
+        jewel_data = {}
+        if(len(jewel)>0):
+            data['jewel_count']=len(jewel[0].select('li'))
+            for i in range(len(jewel[0].select('li'))):
+                if(len(jewel[0].select('li')[i].select('div'))>1):
+                    jewel_temp_id=jewel[0].select('li')[i].select('div')[1].attrs.get('data-item',None)
+                    jewel_data[i]=(re.sub('<.+?>', '', script_data['Equip'][jewel_temp_id]['Element_000']['value'], 0, re.I|re.S) +' - '+\
+                    re.sub('<.+?>', '', script_data['Equip'][jewel_temp_id]['Element_004']['value']['Element_001'], 0, re.I|re.S))
+                    pass
+                pass
+            pass
+
+        data['jewel_data']=jewel_data
         #data['script']=script_data
         data['equip']=equip_data
         data['equip_img']=equip_img
