@@ -10,7 +10,9 @@ https://api.losonsil.com/search/<캐릭터명>
 
 # 실행환경 - Docker-compose
 
-해당 코드는 설계부터 Docker-compose를 사용하여 관리하기 위하여 Dockerfile이 존재합니다.
+해당 코드는 설계부터 여러 환경의 서버에서 작동시키기 위하여 Docker-compose를 사용하여 관리하기 위하여 Dockerfile이 존재합니다.
+
+최초 개발당시 Ubuntu 18.04 x64 서버에서 작동하였으며 현재 소모하는 리소스가 적어 ARMv7의 라즈베리파이4 (Ubuntu) 위에서 작동하고있습니다.
 
 # 기능
 
